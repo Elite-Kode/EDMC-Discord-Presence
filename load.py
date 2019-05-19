@@ -30,7 +30,12 @@ VERSION = '1.0.0'
 #
 # From discrod-rpc.h
 #
-discord_rpc = ctypes.cdll.LoadLibrary(join(dirname(__file__), platform == 'darwin' and 'libdiscord-rpc.dylib' or 'discord-rpc.dll'))
+discord_rpc_lib = 'discord-rpc.dll'
+if platform == 'darwin':
+    discord_rpc_lib = 'libdiscord-rpc.dylib'
+elif platform == 'linux' or platform == 'linux2':
+    discord_rpc_lib = 'libdiscord-rpc.so'
+discord_rpc = ctypes.cdll.LoadLibrary(join(dirname(__file__), discord_rpc_lib))
 
 
 class DiscordRichPresence(ctypes.Structure):
