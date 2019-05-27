@@ -1,5 +1,5 @@
 #
-# KodeBlox Copyright 2017 Sayak Mukhopadhyay
+# KodeBlox Copyright 2019 Sayak Mukhopadhyay
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ from config import config
 
 CLIENT_ID = '386149818227097610'
 
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 #
 # From discrod-rpc.h
