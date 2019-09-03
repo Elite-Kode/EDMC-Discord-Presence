@@ -188,9 +188,9 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
     # TODO: is StartUp even a real event?
     if entry['event'] == 'StartUp':
         if station is None:
-            this.presence_details = f'Flying in {system}'
+            this.presence_details = 'Flying in %s' % system
         else:
-            this.presence_details = f'Docked at {event["StationName"]} in {system}'
+            this.presence_details = 'Docked at %s in %s' % (event['StationName'], system)
     elif entry['event'] == 'ShutDown':
         # TODO: read time from event['timestamp']
         this.presence_time_end = time.time()
@@ -201,24 +201,24 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
             this.presence_time_end = time.time()
             this.presence_details = 'In main menu'
     elif entry['event'] == 'Location' and station is None:
-        this.presence_details = f'Flying in {system}'
+        this.presence_details = 'Flying in %s' % system
     # SUPERCRUISE EVENTS
     elif entry['event'] == 'StartJump':
         if entry['JumpType'] == 'Hyperspace':
-            this.presence_details = f'Jumping to {entry['StarSystem']}'
+            this.presence_details = 'Jumping to %s' % entry['StarSystem']
         elif entry['JumpType'] == 'Supercruise':
-            this.presence_details = f'Supercruising around {system}'
+            this.presence_details = 'Supercruising around %s' % system
     elif entry['event'] == 'SupercruiseEntry' or entry['event'] == 'FSDJump':
-        this.presence_details = f'Supercruising around {system}'
+        this.presence_details = 'Supercruising around %s' % system
     elif entry['event'] == 'SupercruiseExit':
         nearest_body = station or event['Body']
-        this.presence_details = f'Flying around {nearest_body} in {system}'
+        this.presence_details = 'Flying around %s in %s' % (nearest_body, system)
     # STATION EVENTS
     elif entry['event'] == 'Location' and station is not None:
-        this.presence_details = f'Docked at {station} in {system}'
+        this.presence_details = 'Docked at %s in %s' % (station, system)
     elif entry['event'] == 'Docked':
-        this.presence_details = f'Docked at {event["StationName"]} in {system}'
+        this.presence_details = 'Docked at %s in %s' % (event['StationName'], system)
     elif entry['event'] == 'Undocked':
-        this.presence_details = f'Flying at {event["StationName"]} in {system}'
+        this.presence_details = 'Flying at %s in %s' % (event['StationName'], system)
     update_presence()
             
