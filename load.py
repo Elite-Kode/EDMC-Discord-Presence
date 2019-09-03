@@ -138,7 +138,7 @@ this = sys.modules[__name__]	# For holding module globals
 
 this.presence_state = 'Connecting CMDR Interface'
 this.presence_details = ''
-# TODO: read time from event['timestamp']
+# TODO: read time from entry['timestamp']
 # TODO: figure out a better place to set time_start
 this.time_start = time.time()
 this.presence_time_end = None
@@ -192,12 +192,12 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         else:
             this.presence_details = 'Docked at %s in %s' % (entry['StationName'], system)
     elif entry['event'] == 'ShutDown':
-        # TODO: read time from event['timestamp']
+        # TODO: read time from entry['timestamp']
         this.presence_time_end = time.time()
         this.presence_details = 'Shutdown'
     elif entry['event'] == 'Music':
         if entry['MusicTrack'] == 'MainMenu':
-            # TODO: read time from event['timestamp']
+            # TODO: read time from entry['timestamp']
             this.presence_time_end = time.time()
             this.presence_details = 'In main menu'
     elif entry['event'] == 'Location' and station is None:
