@@ -138,7 +138,10 @@ this = sys.modules[__name__]	# For holding module globals
 
 this.presence_state = 'Connecting CMDR Interface'
 this.presence_details = ''
+# TODO: read time from event['timestamp']
+# TODO: figure out a better place to set time_start
 this.time_start = time.time()
+this.presence_time_end = None
 
 def update_presence():
     presence = DiscordRichPresence()
@@ -146,6 +149,8 @@ def update_presence():
         presence.state = this.presence_state
         presence.details = this.presence_details
     presence.startTimestamp = int(this.time_start)
+    if this.presence_time_end:
+        presence.endTimestamp = this.presence_time_end
     Discord_UpdatePresence(presence)
 
 this.disablePresence = None
@@ -179,45 +184,39 @@ def plugin_stop():
 
 
 def journal_entry(cmdr, is_beta, system, station, entry, state):
+    # TODO: is StartUp even a real event?
     if entry['event'] == 'StartUp':
-        this.presence_state = 'In %s' % system
         if station is None:
-            this.presence_details = 'Flying in normal space'
+            this.presence_details = f'Flying in {system}'
         else:
-            this.presence_details = 'Docked at %s' % station
+            this.presence_details = f'Docked at {event["StationName"]} in {system}'
     elif entry['event'] == 'Location':
-        this.presence_state = 'In %s' % system
         if station is None:
-            this.presence_details = 'Flying in normal space'
+            this.presence_details = f'Flying in {system}'
         else:
-            this.presence_details = 'Docked at %s' % station
+            this.presence_details = f'Docked at {event["StationName"]} in {system}'
     elif entry['event'] == 'StartJump':
-        this.presence_state = 'Jumping'
         if entry['JumpType'] == 'Hyperspace':
-            this.presence_details = 'Jumping to %s' % entry['StarSystem']
+            this.presence_details = f'Jumping to {entry['StarSystem']}'
         elif entry['JumpType'] == 'Supercruise':
-            this.presence_details = 'Preparing for supercruise'
-    elif entry['event'] == 'SupercruiseEntry':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Supercruising'
+            this.presence_details = f'Supercruising around {system}'
+    elif entry['event'] == 'SupercruiseEntry' or entry['event'] == 'FSDJump':
+        this.presence_details = f'Supercruising around {system}'
     elif entry['event'] == 'SupercruiseExit':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Flying in normal space'
-    elif entry['event'] == 'FSDJump':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Supercruising'
+        nearest_body = station or event['Body']
+        this.presence_details = f'Flying around {nearest_body} in {system}'
     elif entry['event'] == 'Docked':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Docked at %s' % station
+        this.presence_details = f'Docked at {event["StationName"]} in {system}'
     elif entry['event'] == 'Undocked':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Flying in normal space'
+        this.presence_details = f'Flying at {event["StationName"]} in {system}'
     elif entry['event'] == 'ShutDown':
-        this.presence_state = 'Connecting CMDR Interface'
-        this.presence_details = ''
+        # TODO: read time from event['timestamp']
+        this.presence_time_end = time.time()
+        this.presence_details = 'Shutdown'
     elif entry['event'] == 'Music':
         if entry['MusicTrack'] == 'MainMenu':
-            this.presence_state = 'Connecting CMDR Interface'
-            this.presence_details = ''
+            # TODO: read time from event['timestamp']
+            this.presence_time_end = time.time()
+            this.presence_details = 'In main menu'
     update_presence()
             
