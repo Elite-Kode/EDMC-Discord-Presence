@@ -184,17 +184,25 @@ def plugin_stop():
 
 
 def journal_entry(cmdr, is_beta, system, station, entry, state):
+    # GAME EVENTS
     # TODO: is StartUp even a real event?
     if entry['event'] == 'StartUp':
         if station is None:
             this.presence_details = f'Flying in {system}'
         else:
             this.presence_details = f'Docked at {event["StationName"]} in {system}'
-    elif entry['event'] == 'Location':
-        if station is None:
-            this.presence_details = f'Flying in {system}'
-        else:
-            this.presence_details = f'Docked at {event["StationName"]} in {system}'
+    elif entry['event'] == 'ShutDown':
+        # TODO: read time from event['timestamp']
+        this.presence_time_end = time.time()
+        this.presence_details = 'Shutdown'
+    elif entry['event'] == 'Music':
+        if entry['MusicTrack'] == 'MainMenu':
+            # TODO: read time from event['timestamp']
+            this.presence_time_end = time.time()
+            this.presence_details = 'In main menu'
+    elif entry['event'] == 'Location' and station is None:
+        this.presence_details = f'Flying in {system}'
+    # SUPERCRUISE EVENTS
     elif entry['event'] == 'StartJump':
         if entry['JumpType'] == 'Hyperspace':
             this.presence_details = f'Jumping to {entry['StarSystem']}'
@@ -205,18 +213,12 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
     elif entry['event'] == 'SupercruiseExit':
         nearest_body = station or event['Body']
         this.presence_details = f'Flying around {nearest_body} in {system}'
+    # STATION EVENTS
+    elif entry['event'] == 'Location' and station is not None:
+        this.presence_details = f'Docked at {station} in {system}'
     elif entry['event'] == 'Docked':
         this.presence_details = f'Docked at {event["StationName"]} in {system}'
     elif entry['event'] == 'Undocked':
         this.presence_details = f'Flying at {event["StationName"]} in {system}'
-    elif entry['event'] == 'ShutDown':
-        # TODO: read time from event['timestamp']
-        this.presence_time_end = time.time()
-        this.presence_details = 'Shutdown'
-    elif entry['event'] == 'Music':
-        if entry['MusicTrack'] == 'MainMenu':
-            # TODO: read time from event['timestamp']
-            this.presence_time_end = time.time()
-            this.presence_details = 'In main menu'
     update_presence()
             
