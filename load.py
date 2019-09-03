@@ -136,8 +136,14 @@ Discord_Initialize(CLIENT_ID, event_handlers, True, None)
 
 this = sys.modules[__name__]	# For holding module globals
 
-this.presence_state = 'Connecting CMDR Interface'
-this.presence_details = ''
+this.game_mode = None
+this.in_wing = False
+this.in_crew = False
+this.crew_captain = None
+
+this.presence_details = 'Connecting CMDR Interface'
+this.presence_party_size = -1
+this.presence_party_max = -1
 # TODO: read time from entry['timestamp']
 # TODO: figure out a better place to set time_start
 this.time_start = time.time()
@@ -145,9 +151,24 @@ this.presence_time_end = None
 
 def update_presence():
     presence = DiscordRichPresence()
-    if config.getint("disable_presence")==0:
-        presence.state = this.presence_state
+    if config.getint("disable_presence") == 0:
         presence.details = this.presence_details
+        if this.in_wing:
+            presence.state = 'In wing in %s' % this.game_mode
+            this.presence_party_max = 4
+        elif this.in_crew:
+            if this.crew_captain is True:
+                presence.state = 'Commanding crew in %s' % this.game_mode
+            elif this.crew_captain is None:
+                presence.state = 'In crew in %s' % this.game_mode
+            else:
+                presence.state = 'In %s crew in %s' % (posessivify(this.crew_captain), this.game_mode)
+        elif this.game_mode is not None:
+            presence.state = 'Playing in %s' % this.game_mode
+        if this.presence_party_size > 0:
+            presence.partySize = this.presence_party_size
+            if this.presence_party_max > 0:
+                presence.partyMax = this.presence_party_max
     presence.startTimestamp = int(this.time_start)
     if this.presence_time_end:
         presence.endTimestamp = this.presence_time_end
@@ -191,6 +212,8 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
             this.presence_details = 'Flying in %s' % system
         else:
             this.presence_details = 'Docked at %s in %s' % (entry['StationName'], system)
+    elif entry['event'] == 'LoadGame':
+        this.game_mode = entry['GameMode']
     elif entry['event'] == 'ShutDown':
         # TODO: read time from entry['timestamp']
         this.presence_time_end = time.time()
@@ -222,3 +245,5 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         this.presence_details = 'Flying at %s in %s' % (entry['StationName'], system)
     update_presence()
             
+def posessivify(str):
+    return str.last == 's' if "%s'" % str else "%s's" % str
