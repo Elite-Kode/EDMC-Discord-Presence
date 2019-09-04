@@ -239,10 +239,65 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
     # STATION EVENTS
     elif entry['event'] == 'Location' and station is not None:
         this.presence_details = 'Docked at %s in %s' % (station, system)
+    elif entry['event'] == 'DockingGranted':
+        this.presence_details = 'Docking at %s in %s' % (entry['StationName'], system)
+    elif entry['event'] == 'ApproachSettlement':
+        this.presence_details = 'Approaching settlement on %s in %s' % (entry['BodyName'], system)
     elif entry['event'] == 'Docked':
         this.presence_details = 'Docked at %s in %s' % (entry['StationName'], system)
-    elif entry['event'] == 'Undocked':
+    elif entry['event'] == 'Undocked' or entry['event'] == 'DockingCancelled' or entry['event'] == 'DockingTimeout':
         this.presence_details = 'Flying at %s in %s' % (entry['StationName'], system)
+    # Planetary events
+    elif entry['event'] == 'ApproachBody':
+        this.presence_details = 'Approaching %s in %s' % (entry['Body'], system)
+    elif entry['event'] == 'Touchdown' and entry['PlayerControlled']:
+        # TODO: get planet's name
+        this.presence_details = 'Landed on planet in %s' % system
+    elif entry['event'] == 'Liftoff' and entry['PlayerControlled']:
+        # TODO: get planet's name
+        this.presence_details = 'Flying around %s' % system
+    elif entry['event'] == 'LeaveBody':
+        this.presence_details = 'Supercruising around %s' % system
+    # EXTERNAL VEHICLE EVENTS
+    elif entry['event'] == 'LaunchFighter' and entry['PlayerControlled']:
+        this.presence_details = 'Flying fighter in %s' % system
+    elif entry['event'] == 'DockFighter':
+        this.presence_details = 'Flying in %s' % system
+    elif entry['event'] == 'DockSRV':
+        # TODO: figure out how to get planet's name
+        this.presence_details = 'Landed on planet in %s' % system
+    # WING EVENTS
+    elif entry['event'] == 'WingJoin':
+        this.in_wing = True
+        this.presence_party_size = len(entry['Others']) + 1
+    elif entry['event'] == 'WingAdd':
+        this.in_wing = True
+        if this.presence_party_size <= 0:
+            this.presence_party_size = 1
+        this.presence_party_size += 1
+    elif entry['event'] == 'WingLeave':
+        this.in_wing = False
+        this.presence_party_size = -1
+    # CREW EVENTS
+    elif entry['event'] == 'JoinACrew':
+        this.in_crew = True
+        this.presence_party_size = 2
+        this.crew_captain = entry['Captain']
+    elif entry['event'] == 'CrewMemberJoins':
+        this.in_crew = True
+        this.presence_party_size += 1
+        # TODO: does this event only fire when you're captain?
+        this.crew_captain = True
+    elif entry['event'] == 'ChangeCrewRole':
+        this.in_crew = True
+    elif entry['event'] == 'CrewMemberQuits' or entry['event'] == 'KickCrewMember':
+        this.in_crew = True
+        this.presence_party_size -= 1
+    elif entry['event'] == 'QuitACrew' or entry['event'] == 'EndCrewSession':
+        this.in_crew = False
+        this.presence_party_size = -1
+        this.crew_captain = None
+
     update_presence()
             
 def posessivify(str):
