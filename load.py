@@ -29,7 +29,7 @@ VERSION = '1.2.2'
 
 # Add global var for Planet name (landing + around)
 planet = '<Hidden>'
-
+landingPad = '2'
 #
 # From discrod-rpc.h
 #
@@ -186,6 +186,7 @@ def plugin_stop():
 
 def journal_entry(cmdr, is_beta, system, station, entry, state):
     global planet
+    global landingPad
     if entry['event'] == 'StartUp':
         this.presence_state = ('Dans le système %s' % system).encode()
         if station is None:
@@ -215,13 +216,15 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         this.presence_details = b'Supercruise'
     elif entry['event'] == 'Docked':
         this.presence_state = ('Système %s' % system).encode()
-        this.presence_details = ('Docké à %s' % station).encode()
+        this.presence_details = ('Docké à %s, LandingPad %s' % (station, landingPad)).encode()
     elif entry['event'] == 'Undocked':
         this.presence_state = ('Système %s' % system).encode()
         this.presence_details = b'En vol dans l\'espace'
     elif entry['event'] == 'ShutDown':
         this.presence_state = 'Interfaçage au Vaisseau...'.encode()
         this.presence_details = b''
+    elif entry['event'] == 'DockingGranted':
+        landingPad = entry['LandingPad']
     elif entry['event'] == 'Music':
         if entry['MusicTrack'] == 'MainMenu':
             this.presence_state = 'Interfaçage au Vaisseau...'.encode()
