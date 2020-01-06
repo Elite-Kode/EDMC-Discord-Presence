@@ -27,7 +27,7 @@ CLIENT_ID = b'363413225578037248'
 
 VERSION = '1.2.2'
 
-# Add global var for Planet name (landing+ around)
+# Add global var for Planet name (landing + around)
 planet = '<Hidden>'
 
 #
