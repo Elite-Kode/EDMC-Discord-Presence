@@ -19,14 +19,17 @@ from sys import platform
 import sys
 import time
 import ctypes
-import Tkinter as tk
+import tkinter as tk
 import myNotebook as nb
 from config import config
 
-CLIENT_ID = '386149818227097610'
+CLIENT_ID = b'363413225578037248'
 
-VERSION = '1.1.0'
+VERSION = '1.2.2'
 
+# Add global var for Planet name (landing + around)
+planet = '<Hidden>'
+landingPad = '2'
 #
 # From discrod-rpc.h
 #
@@ -85,7 +88,7 @@ class DiscordEventHandlers(ctypes.Structure):
     ]
 
 
-DISCORD_REPLY_NO, DISCORD_REPLY_YES, DISCORD_REPLY_IGNORE = range(3)
+DISCORD_REPLY_NO, DISCORD_REPLY_YES, DISCORD_REPLY_IGNORE = list(range(3))
 
 Discord_Initialize = discord_rpc.Discord_Initialize
 Discord_Initialize.argtypes = [ctypes.c_char_p, ctypes.POINTER(DiscordEventHandlers), ctypes.c_int, ctypes.c_char_p]  # applicationId, handlers, autoRegister, optionalSteamId
@@ -102,27 +105,27 @@ Discord_Respond.argtypes = [ctypes.c_char_p, ctypes.c_int]  # userid, reply
 
 
 def ready():
-    print 'ready'
+    print('ready')
 
 
 def disconnected(errorCode, message):
-    print 'disconnected', errorCode, message
+    print('disconnected', errorCode, message)
 
 
 def errored(errorCode, message):
-    print 'errored', errorCode, message
+    print('errored', errorCode, message)
 
 
 def joinGame(joinSecret):
-    print 'joinGame', joinSecret
+    print('joinGame', joinSecret)
 
 
 def spectateGame(spectateSecret):
-    print 'spectateGame', spectateSecret
+    print('spectateGame', spectateSecret)
 
 
 def joinRequest(request):
-    print 'joinRequest', request.userId, request.username, request.avatar
+    print('joinRequest', request.userId, request.username, request.avatar)
 
 
 event_handlers = DiscordEventHandlers(ReadyProc(ready),
@@ -136,8 +139,8 @@ Discord_Initialize(CLIENT_ID, event_handlers, True, None)
 
 this = sys.modules[__name__]	# For holding module globals
 
-this.presence_state = 'Connecting CMDR Interface'
-this.presence_details = ''
+this.presence_state = 'Interfaçage au Vaisseau...'.encode()
+this.presence_details = b''
 this.time_start = time.time()
 
 def update_presence():
@@ -149,7 +152,6 @@ def update_presence():
     Discord_UpdatePresence(presence)
 
 this.disablePresence = None
-
 
 def plugin_prefs(parent, cmdr, is_beta):
     """
@@ -169,6 +171,10 @@ def prefs_changed(cmdr, is_beta):
     config.set('disable_presence', this.disablePresence.get())
     update_presence()
 
+def plugin_start3(plugin_dir):
+    update_presence()
+    return 'DiscordPresence'
+
 def plugin_start():
     update_presence()
     return 'DiscordPresence'
@@ -179,45 +185,70 @@ def plugin_stop():
 
 
 def journal_entry(cmdr, is_beta, system, station, entry, state):
+    global planet
+    global landingPad
     if entry['event'] == 'StartUp':
-        this.presence_state = 'In %s' % system
+        this.presence_state = ('Dans le système %s' % system).encode()
         if station is None:
-            this.presence_details = 'Flying in normal space'
+            this.presence_details = b'En vol dans l\'espace'
         else:
-            this.presence_details = 'Docked at %s' % station
+            this.presence_details = ('Docké à %s' % station).encode()
     elif entry['event'] == 'Location':
-        this.presence_state = 'In %s' % system
+        this.presence_state = ('In %s' % system).encode()
         if station is None:
-            this.presence_details = 'Flying in normal space'
+            this.presence_details = b'En vol dans l\'espace'
         else:
-            this.presence_details = 'Docked at %s' % station
+            this.presence_details = ('Docké à %s' % station).encode()
     elif entry['event'] == 'StartJump':
-        this.presence_state = 'Jumping'
+        this.presence_state = b'Saut...'
         if entry['JumpType'] == 'Hyperspace':
-            this.presence_details = 'Jumping to %s' % entry['StarSystem']
+            this.presence_details = ('Saut vers %s' % entry['StarSystem']).encode()
         elif entry['JumpType'] == 'Supercruise':
-            this.presence_details = 'Preparing for supercruise'
+            this.presence_details = 'Préparation d\'un saut en supercruise'.encode()
     elif entry['event'] == 'SupercruiseEntry':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Supercruising'
+        this.presence_state = ('Système %s' % system).encode()
+        this.presence_details = b'Supercruise'
     elif entry['event'] == 'SupercruiseExit':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Flying in normal space'
+        this.presence_state = ('Système %s' % system).encode()
+        this.presence_details = b'En vol dans l\'espace'
     elif entry['event'] == 'FSDJump':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Supercruising'
+        this.presence_state = ('Système %s' % system).encode()
+        this.presence_details = b'Supercruise'
     elif entry['event'] == 'Docked':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Docked at %s' % station
+        this.presence_state = ('Système %s' % system).encode()
+        this.presence_details = ('Docké à %s, LandingPad %s' % (station, landingPad)).encode()
     elif entry['event'] == 'Undocked':
-        this.presence_state = 'In %s' % system
-        this.presence_details = 'Flying in normal space'
+        this.presence_state = ('Système %s' % system).encode()
+        this.presence_details = b'En vol dans l\'espace'
     elif entry['event'] == 'ShutDown':
-        this.presence_state = 'Connecting CMDR Interface'
-        this.presence_details = ''
+        this.presence_state = 'Interfaçage au Vaisseau...'.encode()
+        this.presence_details = b''
+    elif entry['event'] == 'DockingGranted':
+        landingPad = entry['LandingPad']
     elif entry['event'] == 'Music':
         if entry['MusicTrack'] == 'MainMenu':
-            this.presence_state = 'Connecting CMDR Interface'
-            this.presence_details = ''
+            this.presence_state = 'Interfaçage au Vaisseau...'.encode()
+            this.presence_details = b''
+    elif entry['event'] == 'Undocked' or entry['event'] == 'DockingCancelled' or entry['event'] == 'DockingTimeout':
+        this.presence_details = ('En vol près de %s' % entry['StationName']).encode()
+    # Planetary events
+    elif entry['event'] == 'ApproachBody':
+        this.presence_details = ('En approche de %s' % entry['Body']).encode()
+        planet = entry['Body']
+    elif entry['event'] == 'Touchdown' and entry['PlayerControlled']:
+        this.presence_details = ('Posé sur %s' % planet).encode()
+    elif entry['event'] == 'Liftoff' and entry['PlayerControlled']:
+        if entry['PlayerControlled']:
+            this.presence_details = ('Vol autour de %s' % planet).encode()
+        else:
+            this.presence_details = ('En SRV sur %s, Vaisseau en orbite' % planet).encode()
+    elif entry['event'] == 'LeaveBody':
+        this.presence_details = ('Supercruise').encode()
+
+    # EXTERNAL VEHICLE EVENTS
+    elif entry['event'] == 'LaunchSRV':
+        this.presence_details = ('En SRV sur %s' % planet).encode()
+    elif entry['event'] == 'DockSRV':
+        this.presence_details = ('Posé sur %s' % planet).encode()
     update_presence()
             
