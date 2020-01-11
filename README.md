@@ -1,7 +1,3 @@
-This is a fork from [EDMC-Discord-Presence](https://github.com/SayakMukhopadhyay/EDMC-Discord-Presence) by [SayakMukhopadhyay](https://github.com/SayakMukhopadhyay).
-I decided to take over his project which was no longer maintained following the switch to Python3 of ED Market Connector. I'm French, so I translated it for my language, you're free to do the opposite for English, or just ask me via a request :).
-
-
 # EDMC-Discord-Presence
 
 A plugin for [Elite Dangerous Market Connector](https://github.com/Marginal/EDMarketConnector) that enables [Discord Rich Presence](https://discordapp.com/rich-presence) for [Elite Dangerous](https://www.elitedangerous.com/)
@@ -13,7 +9,7 @@ Show your current location to your friends on Discord from your user profile.
 ## Installation
 
 1. [Install EDMC according to instructions](https://github.com/Marginal/EDMarketConnector)
-2. Download the latest version of the plugin from [here](https://github.com/Poneyy/EDMC-Discord-Presence/releases). Make sure to download the release `.zip` and not the source code bundle.
+2. Download the latest version of the plugin from [here](https://github.com/SayakMukhopadhyay/EDMC-Discord-Presence/releases). Make sure to download the release `.zip` and not the source code bundle.
 3. Open Elite Dangerous Market Connector and go to File -> Settings. Then browse to the plugins tab:
 
 ![Plugin Installation](EDMC_Discord_Presence_2.png?raw=true)
@@ -42,7 +38,6 @@ If you are willing to contribute to the project, please work on a fork and creat
 
 For the CMDRs by a CMDR. Created by [CMDR Garud](https://forums.frontier.co.uk/member.php/136073-Garud) for an awesome gaming community. 
 A big thanks to [Jonathan Harris (Marginal)](https://github.com/Marginal) for creating the Python boilerplate code for the Discord Rich Presence SDK. Without his input, the plugin would not have been done. Special mention for the awesome group I am in, [Knights of Karma](http://knightsofkarma.com/), for their continuous support.
-
 
 Translate to french, migrate from python2 to python3 by [Poneyy](https://github.com/Poneyy)
 
