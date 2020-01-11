@@ -1,0 +1,44 @@
+/* Language name */
+"!Language" = "Русский";
+
+/* Idle message. [load.py] */
+"Connecting CMDR Interface" = "Подключение интерфейса КМДР"
+
+/* Details of system. [load.py] */
+"In system {system}" = "В системе {system}"
+
+/* If docked. [load.py] */
+"Docked at {station}" = "Пристыкован к {station}"
+
+/* While jumping. [load.py] */
+"Jumping" = "Гиперпрыжок"
+
+/* If Hyperspace jumping. [load.py] */
+"Jumping to system {system}" = "Гиперпрыжок в систему {system}"
+
+/* If Supercruise jumping. [load.py] */
+"Preparing for supercruise" = "Подготовка к переходу в супереркруиз"
+
+/* When supercruising. [load.py] */
+"Supercruising" = "Полет в суперкруизе"
+
+/* When in normal space. [load.py] */
+"Flying in normal space" = "Полет в обычном космосе"
+
+/* When in normal space and near a station. [load.py] */
+"Flying near {station}" = "Полет вблизи {station}"
+
+/* When approaching a body. [load.py] */
+"Approaching {body}" = "Приближение к {body}"
+
+/* When landed on a body. [load.py] */
+"Landed on {body}" = "Посадка на {body}"
+
+/* After taking off from a body. [load.py] */
+"Flying around {body}" = "Полет возле {body}"
+
+/* When in SRV. [load.py] */
+"In SRV on {body}" = "В ТРП на поверхности {body}"
+
+/* When in SRV and ship has taken off. [load.py] */
+"In SRV on {body}, ship in orbit" = "В ТРП на поверхности {body}, судно на орбите"
