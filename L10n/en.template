@@ -2,43 +2,43 @@
 "!Language" = "English";
 
 /* Idle message. [load.py] */
-"Connecting CMDR Interface" = "Connecting CMDR Interface"
+"Connecting CMDR Interface" = "Connecting CMDR Interface";
 
 /* Details of system. [load.py] */
-"In system {system}" = "In system {system}"
+"In system {system}" = "In system {system}";
 
 /* If docked. [load.py] */
-"Docked at {station}" = "Docked at {station}"
+"Docked at {station}" = "Docked at {station}";
 
 /* While jumping. [load.py] */
-"Jumping" = "Jumping"
+"Jumping" = "Jumping";
 
 /* If Hyperspace jumping. [load.py] */
-"Jumping to system {system}" = "Jumping to system {system}"
+"Jumping to system {system}" = "Jumping to system {system}";
 
 /* If Supercruise jumping. [load.py] */
-"Preparing for supercruise" = "Preparing for supercruise"
+"Preparing for supercruise" = "Preparing for supercruise";
 
 /* When supercruising. [load.py] */
-"Supercruising" = "Supercruising"
+"Supercruising" = "Supercruising";
 
 /* When in normal space. [load.py] */
-"Flying in normal space" = "Flying in normal space"
+"Flying in normal space" = "Flying in normal space";
 
 /* When in normal space and near a station. [load.py] */
-"Flying near {station}" = "Flying near {station}"
+"Flying near {station}" = "Flying near {station}";
 
 /* When approaching a body. [load.py] */
-"Approaching {body}" = "Approaching {body}"
+"Approaching {body}" = "Approaching {body}";
 
 /* When landed on a body. [load.py] */
-"Landed on {body}" = "Landed on {body}"
+"Landed on {body}" = "Landed on {body}";
 
 /* After taking off from a body. [load.py] */
-"Flying around {body}" = "Flying around {body}"
+"Flying around {body}" = "Flying around {body}";
 
 /* When in SRV. [load.py] */
-"In SRV on {body}" = "In SRV on {body}"
+"In SRV on {body}" = "In SRV on {body}";
 
 /* When in SRV and ship has taken off. [load.py] */
-"In SRV on {body}, ship in orbit" = "In SRV on {body}, ship in orbit"
+"In SRV on {body}, ship in orbit" = "In SRV on {body}, ship in orbit";

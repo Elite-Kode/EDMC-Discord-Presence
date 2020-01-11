@@ -2,43 +2,43 @@
 "!Language" = "Français";
 
 /* Idle message. [load.py] */
-"Connecting CMDR Interface" = "Interfaçage au Vaissea"
+"Connecting CMDR Interface" = "Interfaçage au Vaissea";
 
 /* Details of system. [load.py] */
-"In system {system}" = "Dans le système {system}"
+"In system {system}" = "Dans le système {system}";
 
 /* If docked. [load.py] */
-"Docked at {station}" = "Docké à {station}"
+"Docked at {station}" = "Docké à {station}";
 
 /* While jumping. [load.py] */
-"Jumping" = "Saut"
+"Jumping" = "Saut";
 
 /* If Hyperspace jumping. [load.py] */
-"Jumping to system {system}" = "Saut vers {system}"
+"Jumping to system {system}" = "Saut vers {system}";
 
 /* If Supercruise jumping. [load.py] */
-"Preparing for supercruise" = "Préparation d\'un saut en supercruise"
+"Preparing for supercruise" = "Préparation d\'un saut en supercruise";
 
 /* When supercruising. [load.py] */
-"Supercruising" = "Supercruise"
+"Supercruising" = "Supercruise";
 
 /* When in normal space. [load.py] */
-"Flying in normal space" = "En vol dans l\'espace"
+"Flying in normal space" = "En vol dans l\'espace";
 
 /* When in normal space and near a station. [load.py] */
-"Flying near {station}" = "En vol près de {station}"
+"Flying near {station}" = "En vol près de {station}";
 
 /* When approaching a body. [load.py] */
-"Approaching {body}" = "En approche de {body}"
+"Approaching {body}" = "En approche de {body}";
 
 /* When landed on a body. [load.py] */
-"Landed on {body}" = "Posé sur {body}"
+"Landed on {body}" = "Posé sur {body}";
 
 /* After taking off from a body. [load.py] */
-"Flying around {body}" = "Vol autour de {body}"
+"Flying around {body}" = "Vol autour de {body}";
 
 /* When in SRV. [load.py] */
-"In SRV on {body}" = "En SRV sur {body}"
+"In SRV on {body}" = "En SRV sur {body}";
 
 /* When in SRV and ship has taken off. [load.py] */
-"In SRV on {body}, ship in orbit" = "En SRV sur {body}, vaisseau en orbite"
+"In SRV on {body}, ship in orbit" = "En SRV sur {body}, vaisseau en orbite";
