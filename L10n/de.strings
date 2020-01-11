@@ -1,0 +1,44 @@
+/* Language name */
+"!Language" = "Deutsch";
+
+/* Idle message. [load.py] */
+"Connecting CMDR Interface" = "Verbindet mit KMDT-Schnittstelle"
+
+/* Details of system. [load.py] */
+"In system {system}" = "Im System {system}"
+
+/* If docked. [load.py] */
+"Docked at {station}" = "Angedockt an {station}"
+
+/* While jumping. [load.py] */
+"Jumping" = "Springt"
+
+/* If Hyperspace jumping. [load.py] */
+"Jumping to system {system}" = "Springt zum System {system}"
+
+/* If Supercruise jumping. [load.py] */
+"Preparing for supercruise" = "Macht sich bereit für Supercruise"
+
+/* When supercruising. [load.py] */
+"Supercruising" = "Im Supercruise"
+
+/* When in normal space. [load.py] */
+"Flying in normal space" = "Fliegt im normalen Raum"
+
+/* When in normal space and near a station. [load.py] */
+"Flying near {station}" = "Fliegt nahe {station}"
+
+/* When approaching a body. [load.py] */
+"Approaching {body}" = "Nähert sich {body}"
+
+/* When landed on a body. [load.py] */
+"Landed on {body}" = "Gelandet auf {body}"
+
+/* After taking off from a body. [load.py] */
+"Flying around {body}" = "Fliegt um {body}"
+
+/* When in SRV. [load.py] */
+"In SRV on {body}" = "Im SRV auf {body}"
+
+/* When in SRV and ship has taken off. [load.py] */
+"In SRV on {body}, ship in orbit" = "Im SRV auf {body}, Schiff im Orbit"
