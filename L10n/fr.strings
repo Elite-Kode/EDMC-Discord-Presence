@@ -2,7 +2,7 @@
 "!Language" = "Français";
 
 /* Idle message. [load.py] */
-"Connecting CMDR Interface" = "Interfaçage au Vaissea";
+"Connecting CMDR Interface" = "Interfaçage au Vaisseau";
 
 /* Details of system. [load.py] */
 "In system {system}" = "Dans le système {system}";
