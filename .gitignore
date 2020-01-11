@@ -109,3 +109,6 @@ venv.bak/
 # VSCode
 .vscode/
 .vs/
+/config.py
+/myNotebook.py
+/l10n.py
