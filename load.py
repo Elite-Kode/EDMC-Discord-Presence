@@ -230,7 +230,7 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         this.presence_state = _('In system {system}').format(system=system).encode()
         this.presence_details = _('Docked at {station}').format(station=station).encode()
     elif entry['event'] == 'Undocked':
-        this.presence_state = _('In system {system}').format(system=system)
+        this.presence_state = _('In system {system}').format(system=system).encode()
         this.presence_details = _('Flying in normal space').encode()
     elif entry['event'] == 'ShutDown':
         this.presence_state = _('Connecting CMDR Interface').encode()
