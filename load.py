@@ -148,7 +148,7 @@ Discord_Initialize(CLIENT_ID, event_handlers, True, None)
 
 this = sys.modules[__name__]  # For holding module globals
 
-this.presence_state = _('Connecting CMDR Interface').encode('utf-8')
+this.presence_state = _('Connecting CMDR Interface').encode()
 this.presence_details = b''
 this.time_start = time.time()
 
@@ -203,67 +203,67 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
     global planet
     global landingPad
     if entry['event'] == 'StartUp':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
         if station is None:
-            this.presence_details = _('Flying in normal space').encode('utf-8')
+            this.presence_details = _('Flying in normal space').encode()
         else:
-            this.presence_details = _('Docked at {station}').format(station=station).encode('utf-8')
+            this.presence_details = _('Docked at {station}').format(station=station).encode()
     elif entry['event'] == 'Location':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
         if station is None:
-            this.presence_details = _('Flying in normal space').encode('utf-8')
+            this.presence_details = _('Flying in normal space').encode()
         else:
-            this.presence_details = _('Docked at {station}').format(station=station).encode('utf-8')
+            this.presence_details = _('Docked at {station}').format(station=station).encode()
     elif entry['event'] == 'StartJump':
-        this.presence_state = _('Jumping').encode('utf-8')
+        this.presence_state = _('Jumping').encode()
         if entry['JumpType'] == 'Hyperspace':
-            this.presence_details = _('Jumping to system {system}').format(system=entry['StarSystem']).encode('utf-8')
+            this.presence_details = _('Jumping to system {system}').format(system=entry['StarSystem']).encode()
         elif entry['JumpType'] == 'Supercruise':
-            this.presence_details = _('Preparing for supercruise').encode('utf-8')
+            this.presence_details = _('Preparing for supercruise').encode()
     elif entry['event'] == 'SupercruiseEntry':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
-        this.presence_details = _('Supercruising').encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
+        this.presence_details = _('Supercruising').encode()
     elif entry['event'] == 'SupercruiseExit':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
-        this.presence_details = _('Flying in normal space').encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
+        this.presence_details = _('Flying in normal space').encode()
     elif entry['event'] == 'FSDJump':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
-        this.presence_details = _('Supercruising').encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
+        this.presence_details = _('Supercruising').encode()
     elif entry['event'] == 'Docked':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
-        this.presence_details = _('Docked at {station}').format(station=station).encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
+        this.presence_details = _('Docked at {station}').format(station=station).encode()
     elif entry['event'] == 'Undocked':
-        this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
-        this.presence_details = _('Flying in normal space').encode('utf-8')
+        this.presence_state = _('In system {system}').format(system=system).encode()
+        this.presence_details = _('Flying in normal space').encode()
     elif entry['event'] == 'ShutDown':
-        this.presence_state = _('Connecting CMDR Interface').encode('utf-8')
+        this.presence_state = _('Connecting CMDR Interface').encode()
         this.presence_details = b''
     elif entry['event'] == 'DockingGranted':
         landingPad = entry['LandingPad']
     elif entry['event'] == 'Music':
         if entry['MusicTrack'] == 'MainMenu':
-            this.presence_state = _('Connecting CMDR Interface').encode('utf-8')
+            this.presence_state = _('Connecting CMDR Interface').encode()
             this.presence_details = b''
     # Todo: This elif might not be executed on undocked. Functionality can be improved
     elif entry['event'] == 'Undocked' or entry['event'] == 'DockingCancelled' or entry['event'] == 'DockingTimeout':
-        this.presence_details = _('Flying near {station}').format(station=entry['StationName']).encode('utf-8')
+        this.presence_details = _('Flying near {station}').format(station=entry['StationName']).encode()
     # Planetary events
     elif entry['event'] == 'ApproachBody':
-        this.presence_details = _('Approaching {body}').format(body=entry['Body']).encode('utf-8')
+        this.presence_details = _('Approaching {body}').format(body=entry['Body']).encode()
         planet = entry['Body']
     elif entry['event'] == 'Touchdown' and entry['PlayerControlled']:
-        this.presence_details = _('Landed on {body}').format(body=planet).encode('utf-8')
+        this.presence_details = _('Landed on {body}').format(body=planet).encode()
     elif entry['event'] == 'Liftoff' and entry['PlayerControlled']:
         if entry['PlayerControlled']:
-            this.presence_details = _('Flying around {body}').format(body=planet).encode('utf-8')
+            this.presence_details = _('Flying around {body}').format(body=planet).encode()
         else:
-            this.presence_details = _('In SRV on {body}, ship in orbit').format(body=planet).encode('utf-8')
+            this.presence_details = _('In SRV on {body}, ship in orbit').format(body=planet).encode()
     elif entry['event'] == 'LeaveBody':
-        this.presence_details = _('Supercruising').encode('utf-8')
+        this.presence_details = _('Supercruising').encode()
 
     # EXTERNAL VEHICLE EVENTS
     elif entry['event'] == 'LaunchSRV':
-        this.presence_details = _('In SRV on {body}').format(body=planet).encode('utf-8')
+        this.presence_details = _('In SRV on {body}').format(body=planet).encode()
     elif entry['event'] == 'DockSRV':
-        this.presence_details = _('Landed on {body}').format(body=planet).encode('utf-8')
+        this.presence_details = _('Landed on {body}').format(body=planet).encode()
     update_presence()
