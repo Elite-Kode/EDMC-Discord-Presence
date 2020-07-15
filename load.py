@@ -32,6 +32,7 @@ _ = functools.partial(l10n.Translations.translate, context=__file__)
 
 CLIENT_ID = b'386149818227097610'
 
+
 VERSION = '2.1.1'
 
 # Add global var for Planet name (landing + around)
@@ -173,6 +174,7 @@ def plugin_prefs(parent, cmdr, is_beta):
     this.showShipName = tk.IntVar(value=config.getint("show_ship_name"))
     frame = nb.Frame(parent)
     nb.Checkbutton(frame, text="Disable Presence", variable=this.disablePresence).grid()
+    nb.Checkbutton(frame, text="Enable Ship name display", variable=this.showShipName).grid(padx=10)
     nb.Label(frame, text='Version %s' % VERSION).grid(padx=10, pady=10, sticky=tk.W)
 
     return frame
