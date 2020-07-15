@@ -207,7 +207,7 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
     global planet
     global landingPad
     global ship
-    if showShipName != None:
+    if showShipName:
         #create ship name text if enabled.
         shipt = " with " + state["ShipName"]
     else:
