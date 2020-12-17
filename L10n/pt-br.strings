@@ -1,0 +1,47 @@
+/* Language name */
+"!Language" = "Português Brasileiro";
+
+/* template for ship name */
+" with {ship}" = " com {ship}"
+
+/* Idle message. [load.py] */
+"Connecting CMDR Interface" = "Conectando Interface do CMDT";
+
+/* Details of system. [load.py] */
+"In system {system}{ship}" = "No sistema {system}{ship}";
+
+/* If docked. [load.py] */
+"Docked at {station}{ship}" = "Docado em {station}{ship}";
+
+/* While jumping. [load.py] */
+"Jumping" = "Saltando{ship}";
+
+/* If Hyperspace jumping. [load.py] */
+"Jumping to system {system}{ship}" = "Saltando para systema {system}{ship}";
+
+/* If Supercruise jumping. [load.py] */
+"Preparing for supercruise" = "Preparando para supercruseiro{ship}";
+
+/* When supercruising. [load.py] */
+"Supercruising{ship}" = "Supercrusando{ship}";
+
+/* When in normal space. [load.py] */
+"Flying in normal space{ship}" = "Voando em espaço normal{ship}";
+
+/* When in normal space and near a station. [load.py] */
+"Flying near {station}{ship}" = "Voando perto de {station}{ship}";
+
+/* When approaching a body. [load.py] */
+"Approaching {body}{ship}" = "Aproximando-se de {body}{ship}";
+
+/* When landed on a body. [load.py] */
+"Landed on {body}{ship}" = "Pousado em {body}{ship}";
+
+/* After taking off from a body. [load.py] */
+"Flying around {body}{ship}" = "Voando ao redor de {body}{ship}";
+
+/* When in SRV. [load.py] */
+"In SRV on {body}" = "No SRV em {body}";
+
+/* When in SRV and ship has taken off. [load.py] */
+"In SRV on {body}, {ship} in orbit" = "No SRV em {body}, {ship} em órbita";
