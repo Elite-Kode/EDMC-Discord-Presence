@@ -8,40 +8,40 @@
 "Connecting CMDR Interface" = "Interfaçage au Vaisseau";
 
 /* Details of system. [load.py] */
-"In system {system}{ship}" = "Dans le système {system}{ship}";
+"In system {system} {ship}" = "Dans le système {system} {ship}";
 
 /* If docked. [load.py] */
-"Docked at {station}{ship}" = "Docké à {station}{ship}";
+"Docked at {station} {ship}" = "Docké à {station} {ship}";
 
 /* While jumping. [load.py] */
-"Jumping{ship}" = "Saut{ship}";
+"Jumping {ship}" = "Saut{ship}";
 
 /* If Hyperspace jumping. [load.py] */
-"Jumping to system {system}{ship}" = "Saut vers {system}{ship}";
+"Jumping to system {system} {ship}" = "Saut vers {system} {ship}";
 
 /* If Supercruise jumping. [load.py] */
 "Preparing for supercruise" = "Préparation d\'un saut en supercruise";
 
 /* When supercruising. [load.py] */
-"Supercruising{ship}" = "Supercruise{ship}";
+"Supercruising {ship}" = "Supercruise{ship}";
 
 /* When in normal space. [load.py] */
-"Flying in normal space{ship}" = "En vol dans l\'espace{ship}";
+"Flying in normal space {ship}" = "En vol dans l\'espace{ship}";
 
 /* When in normal space and near a station. [load.py] */
-"Flying near {station}{ship}" = "En vol près de {station}{ship}";
+"Flying near {station} {ship}" = "En vol près de {station} {ship}";
 
 /* When approaching a body. [load.py] */
-"Approaching {body}{ship}" = "En approche de {body}{ship}";
+"Approaching {body} {ship}" = "En approche de {body} {ship}";
 
 /* When landed on a body. [load.py] */
-"Landed on {body}{ship}" = "Posé sur {body}{ship}";
+"Landed on {body} {ship}" = "Posé sur {body} {ship}";
 
 /* After taking off from a body. [load.py] */
-"Flying around {body}{ship}" = "Vol autour de {body}{ship}";
+"Flying around {body} {ship}" = "Vol autour de {body} {ship}";
 
 /* When in SRV. [load.py] */
 "In SRV on {body}" = "En SRV sur {body}";
 
 /* When in SRV and ship has taken off. [load.py] */
-"In SRV on {body}, {ship} in orbit" = "En SRV sur {body}, {ship} en orbite";
+"In SRV on {body},  {ship} in orbit" = "En SRV sur {body}, {ship} en orbite";

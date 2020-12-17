@@ -218,17 +218,17 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         if station is None:
             this.presence_details = _('Flying in normal space{ship}').format(ship=shipt).encode('utf-8')
         else:
-            this.presence_details = _('Docked at {station}{ship}').format(station=station,ship=shipt).encode('utf-8')
+            this.presence_details = _('Docked at {station} {ship}').format(station=station,ship=shipt).encode('utf-8')
     elif entry['event'] == 'Location':
         this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
         if station is None:
             this.presence_details = _('Flying in normal space{ship}').format(ship=shipt).encode('utf-8')
         else:
-            this.presence_details = _('Docked at {station}{ship}').format(station=station,ship=shipt).encode('utf-8')
+            this.presence_details = _('Docked at {station} {ship}').format(station=station,ship=shipt).encode('utf-8')
     elif entry['event'] == 'StartJump':
         this.presence_state = _('Jumping').encode('utf-8')
         if entry['JumpType'] == 'Hyperspace':
-            this.presence_details = _('Jumping to system {system}{ship}').format(system=entry['StarSystem'],ship=shipt).encode('utf-8')
+            this.presence_details = _('Jumping to system {system} {ship}').format(system=entry['StarSystem'],ship=shipt).encode('utf-8')
         elif entry['JumpType'] == 'Supercruise':
             this.presence_details = _('Preparing for supercruise{ship}').format(ship=shipt).encode('utf-8')
     elif entry['event'] == 'SupercruiseEntry':
@@ -242,7 +242,7 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         this.presence_details = _('Supercruising{ship}').format(ship=shipt).encode('utf-8')
     elif entry['event'] == 'Docked':
         this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
-        this.presence_details = _('Docked at {station}{ship}').format(ship=shipt,station=station).encode('utf-8')
+        this.presence_details = _('Docked at {station} {ship}').format(ship=shipt,station=station).encode('utf-8')
     elif entry['event'] == 'Undocked':
         this.presence_state = _('In system {system}').format(system=system).encode('utf-8')
         this.presence_details = _('Flying in normal space{ship}').format(ship=shipt).encode('utf-8')
@@ -257,16 +257,16 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
             this.presence_details = b''
     # Todo: This elif might not be executed on undocked. Functionality can be improved
     elif entry['event'] == 'Undocked' or entry['event'] == 'DockingCancelled' or entry['event'] == 'DockingTimeout':
-        this.presence_details = _('Flying near {station}{ship}').format(ship=shipt,station=entry['StationName']).encode('utf-8')
+        this.presence_details = _('Flying near {station} {ship}').format(ship=shipt,station=entry['StationName']).encode('utf-8')
     # Planetary events
     elif entry['event'] == 'ApproachBody':
-        this.presence_details = _('Approaching {body}{ship}').format(body=entry['Body'],ship=shipt).encode('utf-8')
+        this.presence_details = _('Approaching {body} {ship}').format(body=entry['Body'],ship=shipt).encode('utf-8')
         planet = entry['Body']
     elif entry['event'] == 'Touchdown' and entry['PlayerControlled']:
-        this.presence_details = _('Landed on {body}{ship}').format(body=planet,ship=shipt).encode('utf-8')
+        this.presence_details = _('Landed on {body} {ship}').format(body=planet,ship=shipt).encode('utf-8')
     elif entry['event'] == 'Liftoff' and entry['PlayerControlled']:
         if entry['PlayerControlled']:
-            this.presence_details = _('Flying around {body}{ship}').format(body=planet,ship=shipt).encode('utf-8')
+            this.presence_details = _('Flying around {body} {ship}').format(body=planet,ship=shipt).encode('utf-8')
         else:
             this.presence_details = _('In SRV on {body}, {ship} in orbit').format(body=planet,ship=(ship_name if showShipName else 'ship')).encode('utf-8')
     elif entry['event'] == 'LeaveBody':

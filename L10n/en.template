@@ -8,40 +8,40 @@
 "Connecting CMDR Interface" = "Connecting CMDR Interface";
 
 /* Details of system. [load.py] */
-"In system {system}{ship}" = "In system {system}{ship}";
+"In system {system} {ship}" = "In system {system} {ship}";
 
 /* If docked. [load.py] */
-"Docked at {station}{ship}" = "Docked at {station}{ship}";
+"Docked at {station} {ship}" = "Docked at {station} {ship}";
 
 /* While jumping. [load.py] */
-"Jumping" = "Jumping{ship}";
+"Jumping" = "Jumping {ship}";
 
 /* If Hyperspace jumping. [load.py] */
-"Jumping to system {system}{ship}" = "Jumping to system {system}{ship}";
+"Jumping to system {system} {ship}" = "Jumping to system {system} {ship}";
 
 /* If Supercruise jumping. [load.py] */
 "Preparing for supercruise" = "Preparing for supercruise";
 
 /* When supercruising. [load.py] */
-"Supercruising{ship}" = "Supercruising{ship}";
+"Supercruising {ship}" = "Supercruising{ship}";
 
 /* When in normal space. [load.py] */
-"Flying in normal space{ship}" = "Flying in normal space{ship}";
+"Flying in normal space {ship}" = "Flying in normal space{ship}";
 
 /* When in normal space and near a station. [load.py] */
-"Flying near {station}{ship}" = "Flying near {station}{ship}";
+"Flying near {station} {ship}" = "Flying near {station} {ship}";
 
 /* When approaching a body. [load.py] */
-"Approaching {body}{ship}" = "Approaching {body}{ship}";
+"Approaching {body} {ship}" = "Approaching {body} {ship}";
 
 /* When landed on a body. [load.py] */
-"Landed on {body}{ship}" = "Landed on {body}{ship}";
+"Landed on {body} {ship}" = "Landed on {body} {ship}";
 
 /* After taking off from a body. [load.py] */
-"Flying around {body}{ship}" = "Flying around {body}{ship}";
+"Flying around {body} {ship}" = "Flying around {body} {ship}";
 
 /* When in SRV. [load.py] */
 "In SRV on {body}" = "In SRV on {body}";
 
 /* When in SRV and ship has taken off. [load.py] */
-"In SRV on {body}, {ship} in orbit" = "In SRV on {body}, {ship} in orbit";
+"In SRV on {body},  {ship} in orbit" = "In SRV on {body}, {ship} in orbit";
