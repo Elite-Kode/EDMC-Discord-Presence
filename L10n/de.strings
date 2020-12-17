@@ -2,46 +2,46 @@
 "!Language" = "Deutsch";
 
 /* template for ship name */
-" with " = "Deutschverb"
+" with {ship}" = "Deutschverb {ship}"
 
 /* Idle message. [load.py] */
 "Connecting CMDR Interface" = "Verbindet mit KMDT-Schnittstelle";
 
 /* Details of system. [load.py] */
-"In system {system} {ship}" = "Im System {system} {ship}";
+"In system {system}{ship}" = "Im System {system}{ship}";
 
 /* If docked. [load.py] */
-"Docked at {station} {ship}" = "Angedockt an {station} {ship}";
+"Docked at {station}{ship}" = "Angedockt an {station}{ship}";
 
 /* While jumping. [load.py] */
-"Jumping {ship}" = "Springt{ship}";
+"Jumping{ship}" = "Springt{ship}";
 
 /* If Hyperspace jumping. [load.py] */
-"Jumping to system {system} {ship}" = "Springt zum System {system} {ship}";
+"Jumping to system {system}{ship}" = "Springt zum System {system}{ship}";
 
 /* If Supercruise jumping. [load.py] */
 "Preparing for supercruise" = "Macht sich bereit für Supercruise";
 
 /* When supercruising. [load.py] */
-"Supercruising {ship}" = "Im Supercruise{ship}";
+"Supercruising{ship}" = "Im Supercruise{ship}";
 
 /* When in normal space. [load.py] */
-"Flying in normal space {ship}" = "Fliegt im normalen Raum{ship}";
+"Flying in normal space{ship}" = "Fliegt im normalen Raum{ship}";
 
 /* When in normal space and near a station. [load.py] */
-"Flying near {station} {ship}" = "Fliegt nahe {station} {ship}";
+"Flying near {station}{ship}" = "Fliegt nahe {station}{ship}";
 
 /* When approaching a body. [load.py] */
-"Approaching {body} {ship}" = "Nähert sich {body} {ship}";
+"Approaching {body}{ship}" = "Nähert sich {body}{ship}";
 
 /* When landed on a body. [load.py] */
-"Landed on {body} {ship}" = "Gelandet auf {body} {ship}";
+"Landed on {body}{ship}" = "Gelandet auf {body}{ship}";
 
 /* After taking off from a body. [load.py] */
-"Flying around {body} {ship}" = "Fliegt um {body} {ship}";
+"Flying around {body}{ship}" = "Fliegt um {body}{ship}";
 
 /* When in SRV. [load.py] */
 "In SRV on {body}" = "Im SRV auf {body}";
 
 /* When in SRV and ship has taken off. [load.py] */
-"In SRV on {body},  {ship} in orbit" = "Im SRV auf {body}, Schiff im Orbit{ship}";
+"In SRV on {body}, {ship} in orbit" = "Im SRV auf {body}, {ship} im Orbit";

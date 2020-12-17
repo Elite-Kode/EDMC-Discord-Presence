@@ -1,47 +1,47 @@
 /* Language name */
 "!Language" = "Русский";
 
-/* template for ship name */
-" with " = " ??? "
+/* template for ship name text that is appended at the end [load.py] */
+" with {ship}" = " with {ship}"
 
 /* Idle message. [load.py] */
 "Connecting CMDR Interface" = "Подключение интерфейса КМДР";
 
 /* Details of system. [load.py] */
-"In system {system} {ship}" = "В системе {system} {ship}";
+"In system {system}{ship}" = "В системе {system}{ship}";
 
 /* If docked. [load.py] */
-"Docked at {station} {ship}" = "Пристыкован к {station} {ship}";
+"Docked at {station}{ship}" = "Пристыкован к {station}{ship}";
 
 /* While jumping. [load.py] */
-"Jumping {ship}" = "Гиперпрыжок{ship}";
+"Jumping{ship}" = "Гиперпрыжок{ship}";
 
 /* If Hyperspace jumping. [load.py] */
-"Jumping to system {system} {ship}" = "Гиперпрыжок в систему {system} {ship}";
+"Jumping to system {system}{ship}" = "Гиперпрыжок в систему {system}{ship}";
 
 /* If Supercruise jumping. [load.py] */
-"Preparing for supercruise {ship}" = "Подготовка к переходу в супереркруиз{ship}";
+"Preparing for supercruise{ship}" = "Подготовка к переходу в супереркруиз{ship}";
 
 /* When supercruising. [load.py] */
-"Supercruising {ship}" = "Полет в суперкруизе{ship}";
+"Supercruising{ship}" = "Полет в суперкруизе{ship}";
 
 /* When in normal space. [load.py] */
-"Flying in normal space {ship}" = "Полет в обычном космосе{ship}";
+"Flying in normal space{ship}" = "Полет в обычном космосе{ship}";
 
 /* When in normal space and near a station. [load.py] */
-"Flying near {station} {ship}" = "Полет вблизи {station} {ship}";
+"Flying near {station}{ship}" = "Полет вблизи {station}{ship}";
 
 /* When approaching a body. [load.py] */
-"Approaching {body} {ship}" = "Приближение к {body} {ship}";
+"Approaching {body}{ship}" = "Приближение к {body}{ship}";
 
 /* When landed on a body. [load.py] */
-"Landed on {body} {ship}" = "Посадка на {body} {ship}";
+"Landed on {body}{ship}" = "Посадка на {body}{ship}";
 
 /* After taking off from a body. [load.py] */
-"Flying around {body} {ship}" = "Полет возле {body} {ship}";
+"Flying around {body}{ship}" = "Полет возле {body}{ship}";
 
 /* When in SRV. [load.py] */
 "In SRV on {body}" = "В ТРП на поверхности {body}";
 
 /* When in SRV and ship has taken off. [load.py] */
-"In SRV on {body},  {ship} in orbit" = "В ТРП на поверхности {body}, {ship} на орбите";
+"In SRV on {body},{ship} in orbit" = "В ТРП на поверхности {body}, {ship} на орбите";
