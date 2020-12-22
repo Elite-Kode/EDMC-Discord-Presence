@@ -8,13 +8,13 @@
 "Connecting CMDR Interface" = "Verbindet mit KMDT-Schnittstelle";
 
 /* Details of system. [load.py] */
-"In system {system}{ship}" = "Im System {system}{ship}";
+"In system {system}" = "Im System {system}{ship}";
 
 /* If docked. [load.py] */
 "Docked at {station}{ship}" = "Angedockt an {station}{ship}";
 
 /* While jumping. [load.py] */
-"Jumping{ship}" = "Springt{ship}";
+"Jumping" = "Springt{ship}";
 
 /* If Hyperspace jumping. [load.py] */
 "Jumping to system {system}{ship}" = "Springt zum System {system}{ship}";

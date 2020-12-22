@@ -8,7 +8,7 @@
 "Connecting CMDR Interface" = "Conectando Interface do CMDT";
 
 /* Details of system. [load.py] */
-"In system {system}{ship}" = "No sistema {system}{ship}";
+"In system {system}" = "No sistema {system}{ship}";
 
 /* If docked. [load.py] */
 "Docked at {station}{ship}" = "Docado em {station}{ship}";

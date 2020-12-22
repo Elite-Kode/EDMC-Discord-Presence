@@ -224,8 +224,7 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
 			_('Docked at {station}{ship}')\
 			.format(station=station,ship=shipt).encode('utf-8')
 	elif entry['event'] == 'Location':
-		this.presence_state = \
-			_('In system {system}')\
+		this.presence_state = _('In system {system}')\
 			.format(system=system).encode('utf-8')
 		if station is None:
 			this.presence_details = _('Flying in normal space{ship}')\

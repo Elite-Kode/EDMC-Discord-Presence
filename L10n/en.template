@@ -8,13 +8,13 @@
 "Connecting CMDR Interface" = "Connecting CMDR Interface";
 
 /* Details of system. [load.py] */
-"In system {system}{ship}" = "In system {system}{ship}";
+"In system {system}" = "In system {system}";
 
 /* If docked. [load.py] */
 "Docked at {station}{ship}" = "Docked at {station}{ship}";
 
 /* While jumping. [load.py] */
-"Jumping" = "Jumping{ship}";
+"Jumping" = "Jumping";
 
 /* If Hyperspace jumping. [load.py] */
 "Jumping to system {system}{ship}" = "Jumping to system {system}{ship}";
