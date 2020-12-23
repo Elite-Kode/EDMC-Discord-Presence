@@ -173,8 +173,8 @@ def plugin_prefs(parent, cmdr, is_beta):
 	this.disablePresence = tk.IntVar(value=config.getint("disable_presence"))
 	this.showShipName = tk.IntVar(value=config.getint("show_ship_name"))
 	frame = nb.Frame(parent)
-	nb.Checkbutton(frame, text="Disable Presence", variable=this.disablePresence).grid()
-	nb.Checkbutton(frame, text="Enable Ship name display", variable=this.showShipName).grid(padx=10)
+	nb.Checkbutton(frame, text="Disable Presence", variable=this.disablePresence).grid(padx=10, pady=10, sticky=tk.W)
+	nb.Checkbutton(frame, text="Enable Ship name display", variable=this.showShipName).grid(padx=10, pady=10, sticky=tk.W)
 	nb.Label(frame, text='Version %s' % VERSION).grid(padx=10, pady=10, sticky=tk.W)
 
 	return frame
@@ -207,8 +207,8 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
 	global planet
 	global landingPad
 	global ship
-	if showShipName:
-		#create ship name text if enabled.
+	if showShipName and state['ShipName'] != 'None':
+		#create ship name text if enabled and is not None.
 		shipt = " with {ship}".format(ship=state["ShipName"])
 	else:
 		shipt = ""
@@ -304,3 +304,4 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
 	elif entry['event'] == 'DockSRV':
 		this.presence_details = _('Landed on {body}').format(body=planet).encode('utf-8')
 	update_presence()
+
