@@ -8,13 +8,13 @@
 "Connecting CMDR Interface" = "Interfaçage au Vaisseau";
 
 /* Details of system. [load.py] */
-"In system {system}" = "Dans le système {system}{ship}";
+"In system {system}" = "Dans le système {system}";
 
 /* If docked. [load.py] */
 "Docked at {station}{ship}" = "Docké à {station}{ship}";
 
 /* While jumping. [load.py] */
-"Jumping" = "Saut{ship}";
+"Jumping" = "Saut";
 
 /* If Hyperspace jumping. [load.py] */
 "Jumping to system {system}{ship}" = "Saut vers {system}{ship}";
