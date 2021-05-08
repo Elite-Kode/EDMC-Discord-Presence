@@ -23,10 +23,8 @@ import myNotebook as nb
 from config import config
 import l10n
 import functools
-try:
-    import tkinter as tk
-except ImportError:
-    import Tkinter as tk
+import tkinter as tk
+
 
 _ = functools.partial(l10n.Translations.translate, context=__file__)
 
@@ -155,7 +153,7 @@ this.time_start = time.time()
 
 def update_presence():
     presence = DiscordRichPresence()
-    if config.getint("disable_presence") == 0:
+    if config.get_int("disable_presence") == 0:
         presence.state = this.presence_state
         presence.details = this.presence_details
     presence.startTimestamp = int(this.time_start)
@@ -169,7 +167,7 @@ def plugin_prefs(parent, cmdr, is_beta):
     """
     Return a TK Frame for adding to the EDMC settings dialog.
     """
-    this.disablePresence = tk.IntVar(value=config.getint("disable_presence"))
+    this.disablePresence = tk.IntVar(value=config.get_int("disable_presence"))
     frame = nb.Frame(parent)
     nb.Checkbutton(frame, text="Disable Presence", variable=this.disablePresence).grid()
     nb.Label(frame, text='Version %s' % VERSION).grid(padx=10, pady=10, sticky=tk.W)
