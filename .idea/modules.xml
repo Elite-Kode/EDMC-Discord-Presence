@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/EDMC-Discord-Presence.iml" filepath="$PROJECT_DIR$/.idea/EDMC-Discord-Presence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../EDMarketConnector/.idea/EDMarketConnector.iml" filepath="$PROJECT_DIR$/../EDMarketConnector/.idea/EDMarketConnector.iml" />
     </modules>
   </component>
 </project>

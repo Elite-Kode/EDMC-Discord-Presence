@@ -1,0 +1,3 @@
+[submodule "py-discord-sdk"]
+	path = py_discord_sdk
+	url = git@github.com:Elite-Kode/py-discord-sdk.git
