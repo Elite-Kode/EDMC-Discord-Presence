@@ -37,7 +37,7 @@ _ = functools.partial(l10n.Translations.translate, context=__file__)
 
 CLIENT_ID = 386149818227097610
 
-VERSION = '3.0.0'
+VERSION = '3.1.0'
 
 # Add global var for Planet name (landing + around)
 planet = '<Hidden>'
