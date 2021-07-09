@@ -37,7 +37,7 @@ _ = functools.partial(l10n.Translations.translate, context=__file__)
 
 CLIENT_ID = 386149818227097610
 
-VERSION = '3.0.0'
+VERSION = '3.1.0'
 
 # Add global var for Planet name (landing + around)
 planet = '<Hidden>'
@@ -50,6 +50,8 @@ def callback(result):
     logger.info(f'Callback: {result}')
     if result == dsdk.Result.ok:
         logger.info("Successfully set the activity!")
+    elif result == dsdk.Result.transaction_aborted:
+        logger.warning(f'Transaction aborted due to SDK shutting down: {result}')
     else:
         logger.error(f'Error in callback: {result}')
         raise Exception(result)
@@ -112,22 +114,10 @@ def prefs_changed(cmdr, is_beta):
 
 
 def plugin_start3(plugin_dir):
-    plugin_path = join(dirname(plugin_dir), plugin_name)
-    this.app = dsdk.Discord(CLIENT_ID, dsdk.CreateFlags.default, plugin_path)
-    this.activity_manager = this.app.get_activity_manager()
-    this.activity = dsdk.Activity()
-
-    this.call_back_thread = threading.Thread(target=run_callbacks)
-    this.call_back_thread.setDaemon(True)
-    this.call_back_thread.start()
-
-    this.presence_state = _('Connecting CMDR Interface')
-    this.presence_details = ''
-    this.time_start = time.time()
-
-    this.disablePresence = None
-
-    update_presence()
+    this.plugin_dir = plugin_dir
+    this.discord_thread = threading.Thread(target=check_run, args=(plugin_dir,))
+    this.discord_thread.setDaemon(True)
+    this.discord_thread.start()
     return 'DiscordPresence'
 
 
@@ -212,7 +202,36 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         update_presence()
 
 
-def run_callbacks():
-    while True:
+def check_run(plugin_dir):
+    plugin_path = join(dirname(plugin_dir), plugin_name)
+    retry = True
+    while retry:
         time.sleep(1 / 10)
-        this.app.run_callbacks()
+        try:
+            this.app = dsdk.Discord(CLIENT_ID, dsdk.CreateFlags.no_require_discord, plugin_path)
+            retry = False
+        except Exception:
+            pass
+
+    this.activity_manager = this.app.get_activity_manager()
+    this.activity = dsdk.Activity()
+
+    this.call_back_thread = threading.Thread(target=run_callbacks)
+    this.call_back_thread.setDaemon(True)
+    this.call_back_thread.start()
+    this.presence_state = _('Connecting CMDR Interface')
+    this.presence_details = ''
+    this.time_start = time.time()
+
+    this.disablePresence = None
+
+    update_presence()
+
+
+def run_callbacks():
+    try:
+        while True:
+            time.sleep(1 / 10)
+            this.app.run_callbacks()
+    except Exception:
+        check_run(this.plugin_dir)
