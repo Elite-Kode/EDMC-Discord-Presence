@@ -112,22 +112,10 @@ def prefs_changed(cmdr, is_beta):
 
 
 def plugin_start3(plugin_dir):
-    plugin_path = join(dirname(plugin_dir), plugin_name)
-    this.app = dsdk.Discord(CLIENT_ID, dsdk.CreateFlags.default, plugin_path)
-    this.activity_manager = this.app.get_activity_manager()
-    this.activity = dsdk.Activity()
-
-    this.call_back_thread = threading.Thread(target=run_callbacks)
-    this.call_back_thread.setDaemon(True)
-    this.call_back_thread.start()
-
-    this.presence_state = _('Connecting CMDR Interface')
-    this.presence_details = ''
-    this.time_start = time.time()
-
-    this.disablePresence = None
-
-    update_presence()
+    this.plugin_dir = plugin_dir
+    this.discord_thread = threading.Thread(target=check_run, args=(plugin_dir,))
+    this.discord_thread.setDaemon(True)
+    this.discord_thread.start()
     return 'DiscordPresence'
 
 
@@ -212,7 +200,37 @@ def journal_entry(cmdr, is_beta, system, station, entry, state):
         update_presence()
 
 
-def run_callbacks():
-    while True:
+def check_run(plugin_dir):
+    plugin_path = join(dirname(plugin_dir), plugin_name)
+    retry = True
+    while retry:
         time.sleep(1 / 10)
-        this.app.run_callbacks()
+        try:
+            this.app = dsdk.Discord(CLIENT_ID, dsdk.CreateFlags.no_require_discord, plugin_path)
+            retry = False
+        except Exception as ex:
+            print(ex)
+
+    this.activity_manager = this.app.get_activity_manager()
+    this.activity = dsdk.Activity()
+
+    this.call_back_thread = threading.Thread(target=run_callbacks)
+    this.call_back_thread.setDaemon(True)
+    this.call_back_thread.start()
+    this.presence_state = _('Connecting CMDR Interface')
+    this.presence_details = ''
+    this.time_start = time.time()
+
+    this.disablePresence = None
+
+    update_presence()
+
+
+def run_callbacks():
+    try:
+        while True:
+            time.sleep(1 / 10)
+            this.app.run_callbacks()
+    except Exception as ex:
+        print(ex)
+        check_run(this.plugin_dir)
