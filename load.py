@@ -50,6 +50,8 @@ def callback(result):
     logger.info(f'Callback: {result}')
     if result == dsdk.Result.ok:
         logger.info("Successfully set the activity!")
+    elif result == dsdk.Result.transaction_aborted:
+        logger.warning(f'Transaction aborted due to SDK shutting down: {result}')
     else:
         logger.error(f'Error in callback: {result}')
         raise Exception(result)
@@ -208,8 +210,8 @@ def check_run(plugin_dir):
         try:
             this.app = dsdk.Discord(CLIENT_ID, dsdk.CreateFlags.no_require_discord, plugin_path)
             retry = False
-        except Exception as ex:
-            print(ex)
+        except Exception:
+            pass
 
     this.activity_manager = this.app.get_activity_manager()
     this.activity = dsdk.Activity()
@@ -231,6 +233,5 @@ def run_callbacks():
         while True:
             time.sleep(1 / 10)
             this.app.run_callbacks()
-    except Exception as ex:
-        print(ex)
+    except Exception:
         check_run(this.plugin_dir)
