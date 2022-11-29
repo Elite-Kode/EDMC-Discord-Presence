@@ -27,6 +27,7 @@ import time
 import l10n
 import myNotebook as nb
 from config import config, appname, appversion
+import compat
 from py_discord_sdk import discordsdk as dsdk
 
 plugin_name = "DiscordPresence"
@@ -37,7 +38,7 @@ _ = functools.partial(l10n.Translations.translate, context=__file__)
 
 CLIENT_ID = 386149818227097610
 
-VERSION = '3.1.0'
+VERSION = '3.2.0'
 
 # Add global var for Planet name (landing + around)
 planet = '<Hidden>'
@@ -58,45 +59,20 @@ def callback(result):
 
 
 def update_presence():
-    if isinstance(appversion, str):
-        core_version = semantic_version.Version(appversion)
-
-    elif callable(appversion):
-        core_version = appversion()
-
-    logger.info(f'Core EDMC version: {core_version}')
-    if core_version < semantic_version.Version('5.0.0-beta1'):
-        logger.info('EDMC core version is before 5.0.0-beta1')
-        if config.getint("disable_presence") == 0:
-            this.activity.state = this.presence_state
-            this.activity.details = this.presence_details
+    if config.get_int("disable_presence") == 0:
+        this.activity.state = this.presence_state
+        this.activity.details = this.presence_details
+        this.activity.timestamps.start = int(this.time_start)
+        this.activity_manager.update_activity(this.activity, callback)
     else:
-        logger.info('EDMC core version is at least 5.0.0-beta1')
-        if config.get_int("disable_presence") == 0:
-            this.activity.state = this.presence_state
-            this.activity.details = this.presence_details
-
-    this.activity.timestamps.start = int(this.time_start)
-    this.activity_manager.update_activity(this.activity, callback)
+        this.activity_manager.clear_activity(callback)
 
 
 def plugin_prefs(parent, cmdr, is_beta):
     """
     Return a TK Frame for adding to the EDMC settings dialog.
     """
-    if isinstance(appversion, str):
-        core_version = semantic_version.Version(appversion)
-
-    elif callable(appversion):
-        core_version = appversion()
-
-    logger.info(f'Core EDMC version: {core_version}')
-    if core_version < semantic_version.Version('5.0.0-beta1'):
-        logger.info('EDMC core version is before 5.0.0-beta1')
-        this.disablePresence = tk.IntVar(value=config.getint("disable_presence"))
-    else:
-        logger.info('EDMC core version is at least 5.0.0-beta1')
-        this.disablePresence = tk.IntVar(value=config.get_int("disable_presence"))
+    this.disablePresence = tk.IntVar(value=config.get_int("disable_presence"))
 
     frame = nb.Frame(parent)
     nb.Checkbutton(frame, text="Disable Presence", variable=this.disablePresence).grid()
