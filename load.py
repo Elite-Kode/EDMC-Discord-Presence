@@ -204,6 +204,57 @@ def check_run(plugin_dir):
     update_presence()
 
 
+def journal_entry_cqc(cmdr, is_beta, entry, state):
+
+    maps = {
+        'Bleae Aewsy GA-Y d1-14': 'Asteria Point',
+        'Eta Cephei': 'Cluster Compound',
+        'Theta Ursae Majoris': 'Elevate',
+        'Boepp SU-E d12-818': 'Ice Field',
+            }  # dict to convert star systems to CQC maps names
+
+    presence_state = this.presence_state
+    presence_details = this.presence_details
+
+    if state['Horizons']:
+        game_version = 'in Horizons'
+
+    elif state['Odyssey']:
+        game_version = 'in Odyssey'
+
+    elif not state['Horizons'] and not state['Odyssey']:
+        game_version = 'in Arena standalone'  # or in pre horizons elite but who play it now
+
+    else:
+        game_version = ''  # shouldn't happen
+
+    if entry['event'] == ['LoadGame', 'StartUp'] or entry.get('MusicTrack') == 'CQCMenu':
+        presence_state = f'Playing CQC {game_version}'
+        presence_details = 'In lobby/queue'
+
+    if entry['event'] == 'Music' and entry.get('MusicTrack') == 'MainMenu' or entry['event'].lower() == 'shutdown':
+        presence_state = _('Connecting CMDR Interface')
+        presence_details = ''
+
+    if entry['event'] == 'Location' and entry.get('StarSystem'):
+        presence_details = maps.get(entry['StarSystem'], '')
+        presence_state = f'Playing CQC {game_version}'
+
+    if entry['event'] == 'StartUp':
+        if entry.get('StarSystem') is None:
+            presence_state = _('Connecting CMDR Interface')
+            presence_details = ''
+
+        else:
+            presence_details = maps.get(entry['StarSystem'], '')
+            presence_state = f'Playing CQC {game_version}'
+
+    if presence_state != this.presence_state or presence_details != this.presence_details:
+        this.presence_state = presence_state
+        this.presence_details = presence_details
+        update_presence()
+
+
 def run_callbacks():
     try:
         while True:
